@@ -1,9 +1,7 @@
 class Solution {
 public:
     int numSquares(int n) {
-        //vector for updating the dp array/values
         vector<int> dp(n+1,INT_MAX);
-        //base case
         dp[0]=0;
         int count = 1;
         while(count*count <= n) {
