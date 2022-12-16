@@ -6,24 +6,24 @@ public:
         while(i<s.size() && s[i]==' '){
             i++;
         }
+        stack<string> st;
         while(i<s.size()){
-            stack<char> st;
+            string temp;
             while(i<s.size() && s[i]!=' '){
-                st.push(s[i]); i++;
+                temp.push_back(s[i]); i++;
             }
-            if(dy){
-                ans.push_back(' ');
+            if(dy && i!=s.size()-1){
+                temp.push_back(' ');
             }
-            while(!st.empty()){
-                ans.push_back(st.top());
-                st.pop();
-            }
+            st.push(temp);
             dy = true;
             while(i<s.size() && s[i]==' '){
                 i++;
             }
         }
-        reverse(ans.begin(),ans.end());
+        while(!st.empty()){
+            ans = ans + st.top(); st.pop();
+        }
         return ans;
     }
 };
