@@ -1,21 +1,23 @@
 class Solution {
 public:
-    int firstMissingPositive(vector<int>& v) {
-        int i = 0;
-        while(i<v.size()){
-            if(v[i]>0 && v[i]<=v.size() && v[v[i]-1]!=v[i]){
-                swap(v[v[i]-1],v[i]);
+    int firstMissingPositive(vector<int>& nums) {
+        int i=0;
+        while(i<nums.size()){
+            while(nums[i]>0 && nums[i]<nums.size() && nums[i]!=nums[nums[i]-1]){
+                swap(nums[i],nums[nums[i]-1]);
             }
-            else{
-                i++;
+            i++;
+        }
+        for(int i=0; i<nums.size(); i++){
+            cout<<nums[i]<<" ";
+        }
+        cout<<endl;
+        int x = 1;
+        for(int i=0; i<nums.size(); i++){
+            if(nums[i]==x){
+                x++;
             }
         }
-        for (int i = 0; i < v.size(); ++i)
-        {
-            if(v[i]!=i+1){
-                return i+1;
-            }
-        }
-        return i+1;
+        return x;
     }
 };
