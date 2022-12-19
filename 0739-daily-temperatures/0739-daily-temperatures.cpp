@@ -1,24 +1,18 @@
 class Solution {
 public:
-    vector<int> dailyTemperatures(vector<int>& a) {
-        int n=a.size();
-        vector<int>op(n,0);
-        stack<int>st;
-        for(int i=n-1;i>=0;i--){
-            if(st.empty()){
-                st.push(i);
-            }else{
-                while(!st.empty() and a[i]>=a[st.top()]){
-                    st.pop();
-                }
-                if(st.empty()){
-                    st.push(i);
-                }else{
-                    op[i]=st.top()-i;
-                    st.push(i);
-                }
+    vector<int> dailyTemperatures(vector<int>& t) {
+        stack<int> st; unordered_map<int,int> mp;
+        for(int i=0; i<t.size(); i++){
+            while(!st.empty() && (t[i] > t[st.top()])){
+                mp[st.top()] = i;
+                st.pop();
             }
+            st.push(i);
         }
-        return op;
+        vector<int> ans;
+        for(int i=0; i<t.size(); i++){
+            ans.push_back((mp.find(i)==mp.end()?0:(mp[i]-i)));
+        }
+        return ans;
     }
 };
