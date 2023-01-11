@@ -1,16 +1,27 @@
 class Solution {
 public:
     vector<int> majorityElement(vector<int>& nums) {
-        map<int,int> mp;
+        int first=-1,second=-1,fc=0,sc=0;
         for(int i=0; i<nums.size(); i++){
-            mp[nums[i]]++;
-        }
-        vector<int> v;
-        for(auto xx:mp){
-            if(xx.second > floor(nums.size()/3.0)){
-                v.push_back(xx.first);
+            if(nums[i]==first){
+                fc++;
             }
+            else if(nums[i]==second){
+                sc++;
+            }
+            else if(!fc) {first = nums[i]; fc = 1;}
+            else if(!sc) {second = nums[i]; sc = 1;}
+            else{fc--; sc--;}
+            
         }
-        return v;
+        vector<int> ans;
+        int count1=0,count2=0;
+        for(int i=0; i<nums.size(); i++){
+            if(nums[i] == first) count1++;
+            else if(nums[i] == second) count2++;
+        }
+        if(count1 > floor(nums.size()/3.0)) {ans.push_back(first);}
+        if(count2 > floor(nums.size()/3.0)) {ans.push_back(second);}
+        return ans;
     }
 };
