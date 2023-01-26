@@ -13,30 +13,23 @@ public:
     ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
         ListNode* ans = new ListNode(0);
         ListNode* temp = ans;
-            while(list1!=NULL && list2!=NULL){
-                if((list1->val) < (list2->val)){
-                    temp->next = list1;
-                    list1=list1->next;
-                }
-                else{
-                    temp->next = list2;
-                    list2=list2->next;
-                }
-                temp = temp->next;
-            }
-            if(list1!=NULL){
+        while(list1!=NULL && list2!=NULL){
+            if((list1->val) < (list2->val)){
                 temp->next = list1;
-                // temp = list1;
-                // temp=temp->next;
-                // list1=list1->next;
+                list1=list1->next;
             }
-            if(list2!=NULL){
+            else{
                 temp->next = list2;
-                // temp = list2;
-                // temp=temp->next;
-                // list2=list2->next;
+                list2=list2->next;
             }
-        // temp = NULL;
+            temp = temp->next;
+        }
+        if(list1!=NULL){
+            temp->next = list1; //list1 itshelf is a remaining list with null pointer so ...
+        }
+        if(list2!=NULL){
+            temp->next = list2;
+        }
         return ans->next;
     }
 };
