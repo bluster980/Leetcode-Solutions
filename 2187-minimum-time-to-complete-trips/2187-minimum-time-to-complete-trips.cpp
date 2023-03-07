@@ -5,7 +5,6 @@ public:
         long long int totalTrips = 0;
         for(auto x : a)
         {
-            // convert it to long long int 
             long long int val = x;
 			
             totalTrips += (givenTime / val);
