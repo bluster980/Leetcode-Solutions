@@ -9,15 +9,15 @@
 class Solution {
 public:
     ListNode *detectCycle(ListNode *head) {
-        if(head == NULL) return head;
+        if(head==NULL) return NULL;
         set<ListNode*> st;
-        while(head != NULL){
-            int bf = st.size();
+        while(head!=NULL){
+            if(st.find(head)!=st.end()){
+                return head;
+            }
             st.insert(head);
-            int af = st.size();
-            if(af == bf) return head;
             head = head->next;
         }
-        return NULL;
+        return head;
     }
 };
