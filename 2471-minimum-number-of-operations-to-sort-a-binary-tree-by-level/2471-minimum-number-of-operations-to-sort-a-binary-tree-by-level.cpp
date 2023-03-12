@@ -11,31 +11,22 @@
  */
 class Solution {
 public:
-    void swap(vector<int>& arr, int i, int j)
-    {
-        int temp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = temp;
-    }
-    int minSwaps(vector<int> arr, int N)
-    {
-        int ans = 0;
-        vector<int> temp = arr;
-        map<int,int> h;
-        sort(temp.begin(), temp.end());
-        for (int i = 0; i < N; i++) {
-            h[arr[i]] = i;
+    int minSwap(vector<int> &v){
+        int count = 0;
+        vector<int> p = v;
+        sort(p.begin(),p.end());
+        map<int,int> mp;
+        for(int i=0; i<p.size(); i++){
+            mp[p[i]] = i;
         }
-        for (int i = 0; i < N; i++) {
-            if (arr[i] != temp[i]) {
-                ans++;
-                int init = arr[i];
-                swap(arr, i, h[temp[i]]);
-                h[init] = h[temp[i]];
-                h[temp[i]] = i;
+        int i=0;
+        while(i < v.size()){
+            while(i != mp[v[i]]){
+                swap(v[mp[v[i]]],v[i]); count++;
             }
+            i++;
         }
-        return ans;
+        return count;
     }
     int minimumOperations(TreeNode* root) {
         if(root==NULL) return 0;
@@ -54,12 +45,7 @@ public:
                 if(tt->left) q.push(tt->left);
                 if(tt->right) q.push(tt->right);
             }
-            // vv.push_back(v);
-            // for(int i=0; i<vv.size(); i++){
-                int ted = minSwaps(v,v.size());
-                count+=ted;
-                // cout<<ted<<endl;
-            // }
+            count += minSwap(v);
         }
         return count;
     }
