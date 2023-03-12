@@ -15,7 +15,7 @@ public:
         int count = 0;
         vector<int> p = v;
         sort(p.begin(),p.end());
-        map<int,int> mp;
+        unordered_map<int,int> mp;
         for(int i=0; i<p.size(); i++){
             mp[p[i]] = i;
         }
