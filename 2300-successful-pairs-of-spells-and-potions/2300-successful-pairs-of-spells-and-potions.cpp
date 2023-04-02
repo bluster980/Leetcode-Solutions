@@ -1,16 +1,27 @@
 class Solution {
 public:
     vector<int> successfulPairs(vector<int>& spells, vector<int>& potions, long long success) {
-        int postfix[100001] = {0};
-        for(auto potion: potions) postfix[potion]++;
-        for(int i=99999; i>=0; --i) postfix[i] += postfix[i+1];
-
-        for(int i=0; i<spells.size(); ++i){
-            long long val = success / (long long) spells[i];
-            if(success % (long long) spells[i] != 0) val++;
-
-            spells[i] = val <= 1e5 ? postfix[val] : 0;
+        sort(potions.begin(),potions.end());
+        int n = potions.size();
+        vector<int> ans; int index = n;
+        for(int i=0; i<spells.size(); i++){
+            if((long long)spells[i]*(long long)potions[potions.size()-1] < success) ans.push_back(0);
+            else{
+                int l = 0, r = potions.size()-1;
+                while(l <= r){
+                    int mid = l + (r-l)/2;
+                    long long product = (long long)spells[i] * potions[mid];
+                    if(product >= success){
+                        index = mid;
+                        r = mid-1;
+                    }
+                    else{
+                        l = mid+1;
+                    }
+                }
+                ans.push_back(n-index);
+            }
         }
-        return spells;
+        return ans;
     }
 };
