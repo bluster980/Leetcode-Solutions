@@ -8,22 +8,13 @@ public:
             else if(people[i]+people.back() <= limit && (i!=people.size())){
                 count++;
                 people.pop_back();
-            
             }
             else{
                 while(people.size()>i && people[i]+people.back()>limit && (i!=people.size())){
                     count++;
-                    // i++;
                     people.pop_back();
-                    
                 }
-                
-                // cout<<people.back()<<" ";
-                
                 if(people.size()>i) {count++; people.pop_back();}
-                // else{
-                    // count++;
-                // }
             }           
             return count;   
         }
