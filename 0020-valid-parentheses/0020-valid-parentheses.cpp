@@ -13,11 +13,11 @@ public:
                     if(st.top()=='{') st.pop();
                     else {return false;}
                 }
-                if(x==']'){
+                else if(x==']'){
                     if(st.top()=='[') st.pop();
                     else {return false;}
                 }
-                if(x==')'){
+                else if(x==')'){
                     if(st.top()=='(') st.pop();
                     else {return false;}
                 }
