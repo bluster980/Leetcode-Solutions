@@ -11,13 +11,13 @@
  */
 class Solution {
 public:
-    void ziggy(TreeNode* root, int l , int r, int& ans){
+    void zigzag(TreeNode* root, int l , int r, int& ans){
         if(!root) return;
          ans = max(ans, l);
          ans = max(ans, r);
-        ziggy(root->left, 0, l+1, ans);
+        zigzag(root->left, 0, l+1, ans);
         
-        ziggy(root->right, r+1, 0, ans);
+        zigzag(root->right, r+1, 0, ans);
         
         return;
     }
@@ -25,7 +25,7 @@ public:
         int l=0;
         int r=0;
         int ans=0;
-        ziggy(root, l,r,ans);
+        zigzag(root, l,r,ans);
         return ans;
     }
 };
