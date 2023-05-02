@@ -10,7 +10,8 @@ public:
                 return 0;
             }
         }
-        if(neg%2!=0) return -1;
-        return 1;
+        return (neg%2)?-1:1;
+        // if(neg%2!=0) return -1;
+        // return 1;
     }
 };
