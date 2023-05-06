@@ -1,12 +1,9 @@
-/**
- * @param {number} n
- * @return {Function} counter
- */
-var createCounter = function(n) {
+function createCounter(n: number): () => number {
     return function() {
         return n++;
-    };
-};
+    }
+}
+
 
 /** 
  * const counter = createCounter(10)
