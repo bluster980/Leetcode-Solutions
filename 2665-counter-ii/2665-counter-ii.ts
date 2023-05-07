@@ -1,8 +1,10 @@
-/**
- * @param {integer} init
- * @return { increment: Function, decrement: Function, reset: Function }
- */
-var createCounter = function(init) {
+type ReturnObj = {
+    increment: () => number,
+    decrement: () => number,
+    reset: () => number,
+}
+
+function createCounter(init: number): ReturnObj {
     let x = init;
     return {increment: ()=>x+=1, decrement:()=>x-=1, reset:()=>x=init};
 };
