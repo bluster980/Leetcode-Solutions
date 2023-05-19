@@ -9,16 +9,15 @@ public:
         return sum;
     }
     bool isHappy(int n) {
-        int fast=n,slow=n;
-        // cout<<fast<<" "<<slow<<endl;
-        while(slow!=1 && fast!=1){
-            slow = ispower(slow);
-            fast = ispower(ispower(fast));
-            // cout<<slow<<" "<<fast<<endl;
-            if(fast == slow && fast!=1){
-                return false;
-            }
+        unordered_set<int> st;
+        int temp = n,bf,af;
+        while(af!=bf){
+            bf = st.size();
+            temp = ispower(temp);
+            st.insert(temp);
+            af = st.size();
+            if(temp == 1) return true;
         }
-        return true;
+        return false;
     }
 };  
