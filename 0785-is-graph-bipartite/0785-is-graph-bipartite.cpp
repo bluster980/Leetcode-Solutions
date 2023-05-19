@@ -6,7 +6,6 @@ public:
         col[v]=c;
         for(int child:graph[v]){
             if(vis[child]==0){
-                // here c^1 is for flipping 1 by 0 or 0 by 1, that is flip the current color
                 if(dfs(child,c^1,graph)==false) 
                     return false;
             }
