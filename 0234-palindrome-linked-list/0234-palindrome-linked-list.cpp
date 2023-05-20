@@ -22,16 +22,6 @@ public:
             curr = forw;
         }
         if(fast!=NULL) slow=slow->next;
-        // while(slow!=NULL){
-        //     cout<<slow->val<<" ";
-        //     slow=slow->next;
-        // }
-        // cout<<endl;
-        // while(prev!=NULL){
-        //     cout<<prev->val<<" ";
-        //     prev=prev->next;
-        // }
-        // cout<<endl;
         while(prev!=NULL && slow!=NULL && prev->val==slow->val){
             prev=prev->next; slow=slow->next;
         }
