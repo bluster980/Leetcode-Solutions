@@ -1,23 +1,18 @@
-/**
- * @param {any[]} arr
- * @param {number} depth
- * @return {any[]}
- */
-function flat(arr, depth) {
-  if (depth === 0) {
-    return arr.slice(); // Base case: return a shallow copy of the array
-  }
+type MultiDimensionalArray = (number | MultiDimensionalArray)[];
 
-  let flattened = [];
+var flat = function(arr, depth) {
+  const stack = [...arr.map(item => [item, depth])];
+  const result = [];
 
-  for (let i = 0; i < arr.length; i++) {
-    if (Array.isArray(arr[i])) {
-      const nested = flat(arr[i], depth - 1); // Recursively flatten nested arrays
-      flattened.push(...nested); // Concatenate flattened nested arrays to the result
+  while (stack.length > 0) {
+    const [item, depth] = stack.pop();
+
+    if (Array.isArray(item) && depth > 0) {
+      stack.push(...item.map(subItem => [subItem, depth - 1]));
     } else {
-      flattened.push(arr[i]); // Push individual elements to the result
+      result.push(item);
     }
   }
 
-  return flattened; // Return the flattened array
-}
+  return result.reverse();
+};
