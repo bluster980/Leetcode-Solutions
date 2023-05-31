@@ -1,39 +1,37 @@
-class EventEmitter {
-  constructor() {
-    this.subscriptions = {};
-  }
+type Callback = (...args: any[]) => any;
+type Subscription = {
+    unsubscribe: () => void
+}
 
-  subscribe(event, cb) {
-    if (!(event in this.subscriptions)) {
-      this.subscriptions[event] = [];
+class EventEmitter {
+  private _subs: Record<string, Set<Callback>> = {};
+
+  subscribe(eventName: string, callback: Callback): Subscription {
+    let set = this._subs[eventName];
+    if (!set) {
+      this._subs[eventName] = set = new Set();
     }
 
-    const callbackList = this.subscriptions[event];
-    callbackList.push(cb);
+    set.add(callback);
 
     return {
       unsubscribe: () => {
-        const index = callbackList.indexOf(cb);
-        if (index !== -1) {
-          callbackList.splice(index, 1);
-        }
+          set.delete(callback);
       }
     };
   }
 
-  emit(event, args = []) {
-    if (!(event in this.subscriptions)) {
-      return [];
+  emit(eventName: string, args: any[] = []): any {
+    const result: any[] = [];
+    
+    const set = this._subs[eventName];
+    if (set) {
+        set.forEach((fn) => {
+            result.push(fn(...args));
+        });
     }
 
-    const callbackList = this.subscriptions[event];
-    const results = [];
-
-    for (const cb of callbackList) {
-      results.push(cb(...args));
-    }
-
-    return results;
+    return result;
   }
 }
 
