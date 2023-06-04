@@ -5,15 +5,15 @@ public:
         int n = M.size();
 
         vector<int> leads(n, 0);
-        for (int i = 0; i < n; i++) { leads[i] = i; }   // initialize leads for every kid as themselves
+        for (int i = 0; i < n; i++) { leads[i] = i; }
 
         int groups = n;
         for (int i = 0; i < n; i++) {
-            for (int j = i + 1; j < n; j++) {   // avoid recalculate M[i][j], M[j][i]
+            for (int j = i + 1; j < n; j++) {
                 if (M[i][j]) {
                     int lead1 = find(i, leads);
                     int lead2 = find(j, leads);
-                    if (lead1 != lead2) {       // if 2 group belongs 2 different leads, merge 2 group to 1
+                    if (lead1 != lead2) {
                         leads[lead1] = lead2;
                         groups--;
                     }
