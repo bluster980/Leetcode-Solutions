@@ -7,7 +7,6 @@ public:
             int bb = (b & (1<<i)) > 0 ? 1 : 0;
             int cc = (c & (1<<i)) > 0 ? 1 : 0;
             int ss = aa | bb;
-            // cout<<aa<<" "<<bb<<" "<<cc<<" "<<ss<<endl;
             if(ss != cc){
                 if(cc == 1) ans++;
                 else if(cc == 0){
