@@ -14,7 +14,8 @@ public:
                 }
             }
             if(l<n && grid[i][l] < 0)
-                ans += (n-l); cout<<l<<" "<<r<<endl;
+                ans += (n-l); 
+            // cout<<l<<" "<<r<<endl;
         }
         cout<<endl;
         return ans;
