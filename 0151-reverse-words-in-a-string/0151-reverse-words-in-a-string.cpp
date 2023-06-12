@@ -1,29 +1,23 @@
 class Solution {
 public:
     string reverseWords(string s) {
-        string ans; bool dy = false;
-        int i=0;
-        while(i<s.size() && s[i]==' '){
-            i++;
-        }
-        stack<string> st;
-        while(i<s.size()){
-            string temp;
-            while(i<s.size() && s[i]!=' '){
+        stack<string> st; s.push_back(' ');
+        for(int i=0; i<s.size(); i++){
+            string temp = "";
+            while(s[i]!=' '){
                 temp.push_back(s[i]); i++;
             }
-            if(dy && i!=s.size()-1){
-                temp.push_back(' ');
-            }
-            st.push(temp);
-            dy = true;
-            while(i<s.size() && s[i]==' '){
-                i++;
-            }
+            // cout<<temp<<endl;
+            if(temp.size() > 0)
+                st.push(temp);
         }
+        string ans;
         while(!st.empty()){
-            ans = ans + st.top(); st.pop();
+            ans += st.top();
+            ans += ' ';
+            st.pop();
         }
+        ans.pop_back();
         return ans;
     }
 };
