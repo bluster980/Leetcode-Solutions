@@ -12,8 +12,7 @@ public:
         }
         string ans;
         while(!st.empty()){
-            ans += st.top();
-            ans += ' ';
+            ans += (st.top()+" ");
             st.pop();
         }
         ans.pop_back();
