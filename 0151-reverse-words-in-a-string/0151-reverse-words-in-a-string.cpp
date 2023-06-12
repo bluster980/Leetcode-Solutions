@@ -7,7 +7,6 @@ public:
             while(s[i]!=' '){
                 temp.push_back(s[i]); i++;
             }
-            // cout<<temp<<endl;
             if(temp.size() > 0)
                 st.push(temp);
         }
