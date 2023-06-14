@@ -16,10 +16,6 @@ public:
             }
         }
         c = ans;
-        // for(int i=0; i<ans.size(); i++){
-        //     cout<<ans[i]<<" ";
-        // }
-        // cout<<endl;
         return ans.size();
     }
 };
