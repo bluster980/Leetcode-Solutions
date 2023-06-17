@@ -2,8 +2,6 @@ class Solution {
 private:
     int solver(vector<int>& arr1, vector<int>& arr2, int prev, int curr, bool flag, int dp[][2001][2]){
         if(curr == arr1.size()) return 0;
-
-        //prev == -1 is the main problem so thats why shift the index
         if(dp[prev+1][curr][flag] != -1) return dp[prev+1][curr][flag];
 
         int element = prev==-1 ? -1 : (flag ? arr2[prev] : arr1[prev]);
