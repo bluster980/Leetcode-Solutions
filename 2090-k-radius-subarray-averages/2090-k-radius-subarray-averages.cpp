@@ -8,21 +8,14 @@ public:
             ans[i] = -1;
             ans[nums.size()-1 - i] = -1;
         }
-        // cout<<i<<endl;
-        // for(int j=0; j<i; j++){
-        //     cout<<j<<" ";
-        // }
         long long temp = 0;
         for(int j=0; j<=i+k; j++){
             temp += nums[j];
-            // cout<<j<<" ";
         }
-        // cout<<temp<<endl;
         ans[i] = temp/(2*k+1); i++;
         while(i < nums.size()-k){
             temp = (temp-nums[i-k-1]+nums[i+k]);
             ans[i] = temp/(2*k+1);
-            // cout<<i<<" ";
             i++;
         }
         return ans;
