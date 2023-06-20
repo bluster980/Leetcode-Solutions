@@ -1,8 +1,8 @@
 class Solution {
 public:
     vector<int> getAverages(vector<int>& nums, int k) {
-        vector<int> ans(nums.size());
         if(nums.size() < k*2 + 1) return vector<int> (nums.size(),-1);
+        vector<int> ans(nums.size());
         int i=0;
         for(i=0; i<k; i++){
             ans[i] = -1;
