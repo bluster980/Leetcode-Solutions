@@ -1,18 +1,14 @@
 class Solution {
 public:
     int strStr(string h, string n) {
-        string temp;
-        for(int i=0; i<n.size(); i++){
-            temp.push_back(h[i]);
+        int i=0,j=n.size()-1;
+        while(i<h.size()){
+        	// cout<<h.substr(i,j+1)<<endl;
+            if(h.substr(i,j+1) == n){
+                return i;
+            }
+            i++; 
         }
-        int k = 0;
-        for(int i=n.size(); i<h.size(); i++){
-            if(temp == n) return k;
-            temp.erase(temp.begin());
-            temp.push_back(h[i]);
-            k++;
-        }
-        if(temp!=n) return -1;
-        return k;
+        return -1;
     }
 };
