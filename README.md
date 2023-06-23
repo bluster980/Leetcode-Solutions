@@ -25,4 +25,4 @@ OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FR
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ```
-Forgot All The Above & Do Whatever You Want With This Repo 😎
+**Forgot All The Above & Do Whatever You Want With This Repo 😎**
