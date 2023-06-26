@@ -34,30 +34,13 @@ public:
     	return ans;
     }
     ll nCr(ll n, ll r){
-        // ll fact[1001]; fact[0]=1;
-        // for(ll i=1; i<n; i++){
-        //     fact[i] = (i*1ll*fact[i-1])%M;
-        // }
-    //     ll N = 1001;
-    // 	ll facs[N]; facs[0] = 1;
-    // 	for(ll i=1; i<N; i++){
-    // 		facs[i] = (i*1ll*facs[i-1]) % M;
-    // 	}
-    // 	cout<<facs[1000]<<endl;
-    //     // cout<<fact[1000]<<endl;
-    //     ll den = (facs[n-r]*1ll*facs[r]);
-    //     return (facs[n] * 1ll * binExp(den,M-2)) % M;
-        // return 0;
-        ll N = 1001;
-	ll fac[N]; fac[0] = 1;
-	for(ll i=1; i<N; i++){
+	ll fac[n]; fac[0] = 1;
+	for(ll i=1; i<=n; i++){
 		fac[i] = (i*1ll*fac[i-1]) % M;
 	}
-	// cout<<fac[1000];
 	ll num = fac[n];
 	ll den = fac[n-r]*1ll*fac[r];
 	ll ans = num*1ll*binExp(den,M-2);
-// 	cout<<ans%M<<endl;
 	return (n<r)?0:ans%M;
     }
 };
