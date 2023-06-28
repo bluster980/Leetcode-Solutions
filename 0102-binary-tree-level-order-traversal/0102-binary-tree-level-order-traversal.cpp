@@ -11,23 +11,32 @@
  */
 class Solution {
 public:
-    vector<vector<int>> levelOrder(TreeNode* root) {
+    vector<vector<int>> levelsOrder(TreeNode *root){
         vector<vector<int>> v;
-        if(root == NULL) return v;
+        int level = 1;
         queue<TreeNode*> q;
-        q.push(root);
+        q.push(root); q.push(NULL);
+        vector<int> temp;
         while(!q.empty()){
-            int temp = q.size();
-            vector<int> vv;
-            for(int i=0; i<temp; i++){
-                TreeNode* tt = q.front();
-                q.pop();
-                vv.push_back(tt->val);
-                if(tt->left) q.push(tt->left);
-                if(tt->right) q.push(tt->right);
+            TreeNode *cn = q.front(); q.pop();
+            if(cn == NULL){
+                if(q.empty()) break;
+                else
+                    {level++; q.push(NULL); v.push_back(temp); temp.clear();}
             }
-            v.push_back(vv);
+            else{
+                // cout<<cn->val<<" "<<level<<endl;
+                temp.push_back(cn->val);
+                if(cn->left) q.push(cn->left);
+                if(cn->right) q.push(cn->right);
+            }
+            // level++;
         }
+        v.push_back(temp);
         return v;
+    }
+    vector<vector<int>> levelOrder(TreeNode* root) {
+        if(root==NULL) return vector<vector<int>>{};
+        return levelsOrder(root);;
     }
 };
