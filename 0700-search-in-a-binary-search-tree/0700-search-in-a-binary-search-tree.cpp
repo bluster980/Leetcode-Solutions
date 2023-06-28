@@ -15,7 +15,7 @@ public:
     void search(TreeNode* root, int val) {
         if(root==NULL) return;
         if(root->left && root->val > val) search(root->left,val);
-        if(root->val == val) ans = root;
+        if(root->val == val) {ans = root; return;}
         if(root->right && root->val < val) search(root->right,val);
     }
     TreeNode* searchBST(TreeNode* root, int val) {
