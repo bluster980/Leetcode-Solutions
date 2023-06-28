@@ -13,10 +13,10 @@ class Solution {
 public:
     TreeNode* ans = NULL;
     void search(TreeNode* root, int val) {
-        if(root == NULL) return ;
-        if(root->left) search(root->left,val);
+        if(root==NULL) return;
+        if(root->left && root->val > val) search(root->left,val);
         if(root->val == val) ans = root;
-        if(root->right) search(root->right,val);
+        if(root->right && root->val < val) search(root->right,val);
     }
     TreeNode* searchBST(TreeNode* root, int val) {
         search(root,val);
