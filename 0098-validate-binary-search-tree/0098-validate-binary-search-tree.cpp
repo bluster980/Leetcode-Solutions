@@ -11,19 +11,19 @@
  */
 class Solution {
 public:
-    vector<int> v; bool ans = true;
-    void helper(TreeNode* root){
-        if(root == NULL) return ; 
-        if(root->left) helper(root->left);
-        v.push_back(root->val);
-        if(v.size() > 1){
-            if(v[v.size()-2] >= v[v.size()-1]) ans = false;
-        }
-        if(root->right) helper(root->right);
-        
-    }
+    TreeNode* prev = NULL;
     bool isValidBST(TreeNode* root) {
-        helper(root);
-        return ans;
+        if(root == NULL) 
+            return true;
+        if(!isValidBST(root->left)){
+            return false;
+        }
+        if(prev && (prev->val >= root->val)) 
+            return false;
+        prev = root;
+        if(!isValidBST(root->right)){
+            return false;
+        }
+        return true;
     }
 };
