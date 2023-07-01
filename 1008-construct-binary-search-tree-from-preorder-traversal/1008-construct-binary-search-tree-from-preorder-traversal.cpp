@@ -11,16 +11,18 @@
  */
 class Solution {
 public:
-    TreeNode* bst(vector<int> &pre,int l,int r,int &in){
-        if(in>=pre.size() || pre[in]<l || pre[in]>r)
-            return NULL;
-        TreeNode* temp = new TreeNode(pre[in++]);
-        temp->left = bst(pre,l,temp->val,in);
-        temp->right = bst(pre,temp->val,r,in);
+    TreeNode* bst(vector<int>&pre,int l,int r){
+        int in = l;
+        if(in >= r) return NULL;
+        TreeNode* temp = new TreeNode(pre[in]);
+        while(in<pre.size() && pre[in] <= temp->val){
+            in++;
+        }
+        temp->left = bst(pre,l+1,in);
+        temp->right = bst(pre,in,r);
         return temp;
     }
     TreeNode* bstFromPreorder(vector<int>& preorder) {
-        int in = 0;
-        return bst(preorder,INT_MIN,INT_MAX,in);
+        return bst(preorder,0,preorder.size());
     }
 };
