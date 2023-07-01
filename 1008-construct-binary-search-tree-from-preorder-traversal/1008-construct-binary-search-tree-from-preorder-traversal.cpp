@@ -11,15 +11,16 @@
  */
 class Solution {
 public:
-    TreeNode* bst(vector<int>& preorder,int &in, int lowerbound,int upperbound){
-        if(preorder.size() <= in || preorder[in]<lowerbound || preorder[in]>upperbound) return NULL;
-        TreeNode* root = new TreeNode(preorder[in++]);
-        root->left = bst(preorder,in,lowerbound,root->val);
-        root->right = bst(preorder,in,root->val,upperbound);
-        return root;
+    TreeNode* bst(vector<int> &pre,int l,int r,int &in){
+        if(in>=pre.size() || pre[in]<l || pre[in]>r)
+            return NULL;
+        TreeNode* temp = new TreeNode(pre[in++]);
+        temp->left = bst(pre,l,temp->val,in);
+        temp->right = bst(pre,temp->val,r,in);
+        return temp;
     }
     TreeNode* bstFromPreorder(vector<int>& preorder) {
         int in = 0;
-        return bst(preorder,in,INT_MIN,INT_MAX);
+        return bst(preorder,INT_MIN,INT_MAX,in);
     }
 };
