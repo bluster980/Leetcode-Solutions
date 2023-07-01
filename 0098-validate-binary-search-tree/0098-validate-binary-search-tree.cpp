@@ -15,7 +15,6 @@ public:
     void helper(TreeNode* root){
         if(root == NULL) return ; 
         if(root->left) helper(root->left);
-        // cout<<root->val<<" ";
         v.push_back(root->val);
         if(v.size() > 1){
             if(v[v.size()-2] >= v[v.size()-1]) ans = false;
