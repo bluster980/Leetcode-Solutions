@@ -2,7 +2,7 @@ class Solution {
 public:
     bool buddyStrings(string s, string g) {
         if(s.size() == 1) return false;
-        map<char,int> mp;
+        unordered_map<char,int> mp;
         for(int i=0; i<s.size(); i++){
             mp[s[i]]++;
         }
