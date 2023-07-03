@@ -13,14 +13,10 @@ public:
                 else {second = i; break;}
             }
         }
-        // cout<<first<<" "<<second<<endl;
         if(first!=INT_MIN && second!=INT_MIN){
             swap(s[first],s[second]);
             return s==g;
         }
-        else if(s==g){
-            return (mp.size()<s.size());
-        }
-        return false;
+        return s==g && (mp.size()<s.size());
     }
 };
