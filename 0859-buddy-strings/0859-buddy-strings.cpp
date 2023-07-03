@@ -2,9 +2,9 @@ class Solution {
 public:
     bool buddyStrings(string s, string g) {
         if(s.size() == 1) return false;
-        unordered_map<char,int> mp;
+        unordered_set<char> st;
         for(int i=0; i<s.size(); i++){
-            mp[s[i]]++;
+            st.insert(s[i]);
         }
         int first = INT_MIN,second = INT_MIN;
         for(int i=0; i<s.size(); i++){
@@ -17,6 +17,6 @@ public:
             swap(s[first],s[second]);
             return s==g;
         }
-        return s==g && (mp.size()<s.size());
+        return s==g && (st.size()<s.size());
     }
 };
