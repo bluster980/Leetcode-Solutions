@@ -12,7 +12,7 @@ class Solution{
     public:
     int maxLen(vector<int>&A, int n)
     {   
-        map<int,int> mp; mp[A[0]] = 0; mp[0]=-1;
+        unordered_map<int,int> mp; mp[A[0]] = 0; mp[0]=-1;
         for(int i=1; i<A.size(); i++){
             A[i]+=A[i-1];
             if(mp.find(A[i])==mp.end()){
