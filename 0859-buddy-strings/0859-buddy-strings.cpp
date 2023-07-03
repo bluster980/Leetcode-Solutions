@@ -11,8 +11,6 @@ public:
                 else {second = i; break;}
             }
         }
-        // for(int i=0; i<s.size(); i++){
-        // }
         if(first!=INT_MIN && second!=INT_MIN){
             swap(s[first],s[second]);
             return s==g;
