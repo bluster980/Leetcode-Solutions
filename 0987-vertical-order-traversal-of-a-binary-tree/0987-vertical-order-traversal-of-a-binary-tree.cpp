@@ -24,8 +24,7 @@ public:
             else{
                 map<int,int> go; go.clear(); go.insert({x,level});
                 mp.insert({go,temp->val});
-                // mp[{x,level}] = temp->val;
-                // cout<<x<<" "<<level<<" "<<temp->val<<endl;
+
                 if(temp->left) q.push({x-1,temp->left});
                 if(temp->right) q.push({x+1,temp->right});
             }
@@ -38,11 +37,7 @@ public:
         multimap<map<int,int>,int> mp; 
         vector<vector<int>> ans;
         tra(root,mp); 
-        // multimap<int,int> dumy;
-        // for(auto xx:mp){
-        //     dumy.insert({xx.first.first,xx.second});
-        // }
-        // map<int,int> mpppp; mpppp.insert({-2,2}); mp.insert({mpppp,3});
+
         vector<int> yui; int prev;
         vector<pair<map<int, int>, int>> vec(mp.begin(), mp.end());
         sort(vec.begin(),vec.end()); int tt = 0,temm=1; 
@@ -53,9 +48,7 @@ public:
                 }
                 yui.push_back(pair.second);
                 if(temm--) {prev = element.first; tt++;}
-                // cout << element.first <<" "<< element.second<<" ";
             }
-            // cout << pair.second << std::endl;
         }
         ans.push_back(yui);
         return ans;
