@@ -1,14 +1,22 @@
 class Solution {
 public:
     int singleNumber(vector<int>& nums) {
-        int oneCounter = 0;
-        int twoCounter = 0;
-        
-        for (int &n : nums) {
-            oneCounter = (oneCounter ^ n) & ~twoCounter;
-            twoCounter = (twoCounter ^ n) & ~oneCounter;
+        vector<int> bitset(32,0);
+        for(int &n:nums) {
+            int mask = 0;
+            while(mask<32) {
+                if((n&(1<<mask))) {
+                    bitset[mask]++;
+                }
+                mask++;
+            }
         }
-        
-        return oneCounter;
+        int nm  = 0;
+        for(int i = 0; i < 32; i++) {
+            if(bitset[i]%3) {
+                nm |= (1 <<i);
+            }   
+        }
+        return nm;
     }
 };
