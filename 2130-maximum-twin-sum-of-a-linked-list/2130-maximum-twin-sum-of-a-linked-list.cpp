@@ -11,34 +11,25 @@
 class Solution {
 public:
     int pairSum(ListNode* head) {
-	ListNode* slow = head;
-	ListNode* fast = head;
-	int maxVal = 0;
-
-	// Get middle of linked list
-	while(fast && fast -> next)
-	{
-		fast = fast -> next -> next;
-		slow = slow -> next;
-	}
-
-	// Reverse second part of linked list
-	ListNode *nextNode, *prev = NULL;
-	while (slow) {
-		nextNode = slow->next;
-		slow->next = prev;
-		prev = slow;
-		slow = nextNode;
-	}
-
-	// Get max sum of pairs
-	while(prev)
-	{
-		maxVal = max(maxVal, head -> val + prev -> val);
-		prev = prev -> next;
-		head = head -> next;
-	}
-
-	return maxVal;
-}
+        ListNode* temp = head,*twice=head; int cnt = 0;
+        while(temp!=NULL) {temp=temp->next; cnt++;}
+        vector<int> v(cnt/2,0);
+        int i=0;
+        while(i<v.size() && twice!=NULL){
+            v[i]+=twice->val;
+            // cout<<twice->val<<" ";
+            twice=twice->next;
+            i++;
+        } i--;
+        cout<<endl;
+        while(i>=0 && twice!=NULL){
+            v[i]+=twice->val;
+            // cout<<twice->val<<" ";
+            twice=twice->next;
+            i--;
+        }
+        // for(int i=0; i<v.size(); i++) cout<<v[i]<<" ";
+        return *max_element(v.begin(),v.end());
+        
+    }
 };
