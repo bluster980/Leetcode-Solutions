@@ -11,14 +11,13 @@ public:
 	        if(temp)
 		    result+=temp-d;
 	    }
-        return result||hasApple[node]?result+d:0;
-        
+        return result||hasApple[node]?result+d:0; 
     }
     int minTime(int n, vector<vector<int>>& edges, vector<bool>& hasApple) 
     {
         adjList.resize(n);
         for(vector<int> &e:edges)
             adjList[e[0]].push_back(e[1]),adjList[e[1]].push_back(e[0]);
-        return dfs(hasApple,0,0,-1)*2;
+        return dfs(hasApple,0,0,-1)*2;     //Result is doubled the distance travelled as per our observation.
     }
 };
