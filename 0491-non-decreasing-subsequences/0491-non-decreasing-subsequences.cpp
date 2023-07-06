@@ -1,22 +1,27 @@
 class Solution {
 public:
-    vector<vector<int>> findSubsequences(vector<int>& nums) {
-        vector<vector<int>> res;
-        vector<int> seq;
-        dfs(res, seq, nums, 0);
-        return res;
-    }
-    
-    void dfs(vector<vector<int>>& res, vector<int>& seq, vector<int>& nums, int pos) {
-        if(seq.size() > 1) res.push_back(seq);
-        unordered_set<int> hash;
-        for(int i = pos; i < nums.size(); ++i) {
-            if((seq.empty() || nums[i] >= seq.back()) && hash.find(nums[i]) == hash.end()) {
-                seq.push_back(nums[i]);
-                dfs(res, seq, nums, i + 1);
-                seq.pop_back();
-                hash.insert(nums[i]);
+    void func(int idx,vector<int>&nums,vector<int>&a,set<vector<int>>&ans){
+        int n=nums.size();
+        if(idx>=n){
+            if(a.size()>=2){
+                ans.insert(a);
             }
+            return ;
         }
+    
+        if(!a.size()||nums[idx]>=a.back()){
+
+            a.push_back(nums[idx]);
+            func(idx+1,nums,a,ans);
+            a.pop_back();
+        }
+        func(idx+1,nums,a,ans); 
+    }
+    vector<vector<int>> findSubsequences(vector<int>& nums) {
+        vector<int>temp;
+        set<vector<int>>ans;
+        func(0,nums,temp,ans);
+        return vector(ans.begin(),ans.end());
+        
     }
 };
