@@ -1,7 +1,7 @@
 class Solution {
 public:
     void dfs(int i, string &l, vector<vector<int>>& al, int cnt[], vector<int> &res) {
-        if (res[i] == 0) {
+    if (res[i] == 0) {
             res[i] = 1;
             for (auto j : al[i]) {
                 int cnt1[26] = {};
