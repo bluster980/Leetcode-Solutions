@@ -1,26 +1,15 @@
 class Solution {
 public:
-    int maxSubarraySumCircular(vector<int>& nums) {
-        int maxx = nums[0];
-        int minn = -nums[0];
-        int curMax = 0;
-        int curMin = 0;
-        int total = 0;
-        
-        for(int i = 0; i < nums.size(); i++){
-            total += nums[i];
-            curMax += nums[i];
-            curMin += -nums[i];
-            
-            if(curMax < nums[i])
-                curMax = nums[i];
-            if(-nums[i] > curMin)
-                curMin = -nums[i];
-            
-            maxx = max(maxx, curMax);
-            minn = max(minn, curMin);
-            
+    int maxSubarraySumCircular(vector<int>& A) {
+        int total_sum=0,curr_sum1=0,curr_sum2=0,mxsum_subary=INT_MIN,minsum_subary=INT_MAX;   
+        for(auto i:A)
+        {
+            total_sum+=i; curr_sum1+=i; curr_sum2+=i;
+            mxsum_subary=max(mxsum_subary,curr_sum1);
+            if(curr_sum1<0) curr_sum1=0;
+           minsum_subary=min(curr_sum2,minsum_subary);
+            if(curr_sum2>0) curr_sum2=0;
         }
-        return total + minn == 0 ? maxx : max(total + minn, maxx);
+        return (total_sum==minsum_subary)?mxsum_subary:max(mxsum_subary,total_sum-minsum_subary);  
     }
 };
