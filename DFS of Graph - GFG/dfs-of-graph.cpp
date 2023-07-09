@@ -5,19 +5,19 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
   public:
-    vector<int> ans;
-    void dfs(int vertex,vector<int> g[],vector<int> &vis){
+    
+    void dfs(int vertex,vector<int> g[],vector<int> &vis,vector<int> &ans){
         vis[vertex] = true;
         ans.push_back(vertex);
         for(auto child:g[vertex]){
             if(!vis[child]){
-                dfs(child,g,vis);
+                dfs(child,g,vis,ans);
             }
         }
     }
     vector<int> dfsOfGraph(int V, vector<int> adj[]) {
-        vector<int> vis(V,0);
-        dfs(0,adj,vis);
+        vector<int> vis(V,0); vector<int> ans;
+        dfs(0,adj,vis,ans);
         return ans;
     }
 };
