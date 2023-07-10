@@ -11,10 +11,15 @@
  */
 class Solution {
 public:
-    int minDepth(TreeNode *root) {
-        if(!root) return 0;
-        if(!root->left) return 1 + minDepth(root->right);
-        if(!root->right) return 1 + minDepth(root->left);
-        return 1+min(minDepth(root->left),minDepth(root->right));
+    int minDepth(TreeNode* root) {
+        if(root == NULL) return 0;
+        queue<pair<TreeNode*,int>> q; q.push({root,1});
+        while(!q.empty()){
+            TreeNode* tmp = q.front().first; int x = q.front().second; q.pop();
+            if(tmp->left==NULL && tmp->right==NULL) return x;
+            if(tmp->left) q.push({tmp->left,x+1});
+            if(tmp->right) q.push({tmp->right,x+1});
+        }
+        return -1;
     }
 };
