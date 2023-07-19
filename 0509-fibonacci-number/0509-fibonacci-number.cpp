@@ -5,16 +5,17 @@ public:
     //     dp[n] = fibon(n-1,dp)+fibon(n-2,dp);
     //     return dp[n];
     // }
-    int tabu(int n,vector<int>&dp){
+    int tabu(int n){
+        int prev1=1,prev2=0;
         for(int i=2; i<=n; i++){
-            dp[i] = dp[i-1]+dp[i-2];
+            int temp = prev1+prev2;
+            prev2=prev1; prev1=temp;
         }
-        return dp[n];
+        return prev1+prev2;
     }
     int fib(int n) {
-        // if(n==0 || n==1) return n;
-        vector<int> dp(n+2);
-        dp[0]=0,dp[1]=1;
-        return tabu(n,dp);
+        if(n==0 || n==1) return n;
+         //to avoid dp[1] when n is zero we have used n+2.
+        return tabu(n-1);
     }
 };
