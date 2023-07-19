@@ -12,10 +12,9 @@ public:
         return dp[n];
     }
     int fib(int n) {
-        if(n==0 || n==1) return n;
-        vector<int> dp(n+1);
+        // if(n==0 || n==1) return n;
+        vector<int> dp(n+2);
         dp[0]=0,dp[1]=1;
         return tabu(n,dp);
-        // return dp[n];
     }
 };
