@@ -41,8 +41,6 @@ public:
                 }
             }
         }
-		// finally we are returning the elements which remains in the stack.
-		// we have to return them in reverse order.
         vector<int> res(s.size());
         for(int i = (int)s.size() - 1; i >= 0; i--) {
             res[i] = s.top();
