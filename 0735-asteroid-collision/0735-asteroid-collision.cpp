@@ -1,38 +1,53 @@
+// class Solution {
+// public:
+//     vector<int> asteroidCollision(vector<int>& aster) {
+//         vector<int> ans; bool destroyed = true;
+//         for(int i=0; i<aster.size(); i++){
+//             while(ans.size() && (ans.back() > 0) && (aster[i] < 0) && destroyed){
+//                 if(ans.back() >= -aster[i]){
+//                     destroyed = false;
+//                 }
+//                 else if(ans.back() <= -aster[i]){
+//                     ans.pop_back();
+//                 }
+//             }
+//             if(destroyed){
+//                 ans.push_back(aster[i]);
+//             }
+//         }
+//         return ans;
+//     }
+// };
 class Solution {
 public:
-    vector<int> asteroidCollision(vector<int>& ass) {
-        stack<int> st; int i=0;
-        while(i<ass.size()){
-            if(!st.empty() && ass[i] < 0){
-                if((ass[i]>0 && st.top()>0) || (ass[i]<0 && st.top()<0)){
-                    st.push(ass[i]); i++;
+    vector<int> asteroidCollision(vector<int>& ast) {
+        int n = ast.size();
+        stack<int> s;
+        for(int i = 0; i < n; i++) {
+            if(ast[i] > 0 || s.empty()) {
+                s.push(ast[i]);
+            }
+            else {
+                while(!s.empty() and s.top() > 0 and s.top() < abs(ast[i])) {
+                    s.pop();
                 }
-                else if(ass[i] < 0){
-                    if(st.top() < 0) {st.push(ass[i]); i++;}
-                    else{
-                        if(st.top() > abs(ass[i])){
-                            i++;
-                        }
-                        else if(st.top() == abs(ass[i])){
-                            st.pop(); i++;
-                        }
-                        else{
-                            st.pop();
-                        }
+                if(!s.empty() and s.top() == abs(ast[i])) {
+                    s.pop();
+                }
+                else {
+                    if(s.empty() || s.top() < 0) {
+                        s.push(ast[i]);
                     }
                 }
-                else 
-                    {st.push(ass[i]); i++;}
-            }
-            else{
-                st.push(ass[i]); i++;
             }
         }
-        vector<int> ans;
-        while(!st.empty()){
-            ans.push_back(st.top()); st.pop();
+		// finally we are returning the elements which remains in the stack.
+		// we have to return them in reverse order.
+        vector<int> res(s.size());
+        for(int i = (int)s.size() - 1; i >= 0; i--) {
+            res[i] = s.top();
+            s.pop();
         }
-        reverse(ans.begin(),ans.end());
-        return ans;
+        return res;
     }
 };
