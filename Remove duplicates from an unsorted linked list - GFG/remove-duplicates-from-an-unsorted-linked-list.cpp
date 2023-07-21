@@ -44,10 +44,10 @@ class Solution
     Node * removeDuplicates( Node *head) 
     {
         Node* ans = new Node(-1);
-        map<int,int> mp; Node* prev = ans;
+        vector<int> v(10001,0); Node* prev = ans;
         while(head!=NULL){
-            if(mp.find(head->data)==mp.end()){
-                mp[head->data]++; 
+            if(!v[head->data]){
+                v[head->data]++; 
                 prev->next=head; 
                 prev=head;
             }
