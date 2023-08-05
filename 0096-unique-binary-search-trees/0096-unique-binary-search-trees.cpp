@@ -1,6 +1,9 @@
 class Solution {
 public:
-    unordered_map<int,int> dp;
+    // unordered_map<int,int> dp;
+    // static const int n = 1e3;
+    // vector<int> dp(n);
+    int dp[20];
     int numTrees(int n) {
         if(n==0 || n==1) return 1;
         if(dp[n]!=0) return dp[n];
