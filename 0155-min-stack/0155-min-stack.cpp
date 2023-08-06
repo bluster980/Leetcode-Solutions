@@ -5,12 +5,7 @@ public:
     }
     
     void push(int val) {
-        if(v.empty()){
-            v.push_back({val,val});
-        }
-        else{
-            v.push_back({val,min(val,v.back().second)});
-        }
+        (v.empty())?v.push_back({val,val}):v.push_back({val,min(val,v.back().second)});
     }
     
     void pop() {
