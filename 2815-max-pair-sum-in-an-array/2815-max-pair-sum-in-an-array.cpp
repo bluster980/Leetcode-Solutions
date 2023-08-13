@@ -1,20 +1,24 @@
 class Solution {
 public:
     int maxSum(vector<int>& nums) {
-        int res = 0;
-        for(int i = 0; i<nums.size(); i++){
-            string first = to_string(nums[i]);
-            sort(begin(first),end(first));
-            
-            for(int j = i+1; j<nums.size(); j++){
-                string sec = to_string(nums[j]);
-                sort(begin(sec),end(sec));
-                if(first[first.size()-1] == sec[sec.size()-1]){
-                    res = max(res,nums[i]+nums[j]);
-                }
+        map<int,vector<int>> mp;
+        for(int i=0; i<nums.size(); i++){
+            int temp = nums[i]; int maxdig = temp%10;
+            while(temp>0){
+                maxdig = max(maxdig,temp%10);
+                temp/=10;
+            }
+            mp[maxdig].push_back(nums[i]);
+        }
+        int maxx = -1;
+        for(auto xx:mp){
+            auto temp = xx.second;
+            sort(temp.begin(),temp.end());
+            if(temp.size() > 1){
+                maxx = max(temp[temp.size()-1] + temp[temp.size()-2],maxx);
             }
         }
         
-        return res == 0 ? -1 : res;
+        return maxx;
     }
 };
