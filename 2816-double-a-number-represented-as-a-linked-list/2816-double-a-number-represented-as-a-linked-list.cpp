@@ -10,15 +10,29 @@
  */
 class Solution {
 public:
-    int multiply(ListNode* head){
-        if(!head) return 0;
-        int t = head->val*2 + multiply(head->next);
-        head->val = t%10;
-        return t/10;
-    }
     ListNode* doubleIt(ListNode* head) {
-        int t = multiply(head);
-        if(t) head = new ListNode(t, head);
-        return head;
+        ListNode *temp = head;
+        vector<int> v;
+        while(temp!=NULL){
+            v.push_back(temp->val);
+            temp = temp->next;
+        }
+        reverse(v.begin(),v.end()); int carry = 0;
+        for(int i=0; i<v.size(); i++){
+            carry += v[i]*2;
+            v[i] = carry%10;
+            carry/=10;
+        }
+        if(carry > 0) v.push_back(carry);
+        ListNode *heads = new ListNode(999);
+        ListNode *dumy = heads;
+        // dumy = dumy->next;
+        reverse(v.begin(),v.end());
+        for(int i=0; i<v.size(); i++){
+            dumy->next = new ListNode(v[i]);
+            dumy = dumy->next;
+        }
+        // dumy = NULL;
+        return heads->next;
     }
 };
