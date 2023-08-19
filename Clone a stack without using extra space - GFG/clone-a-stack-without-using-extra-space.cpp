@@ -9,9 +9,15 @@ using namespace std;
 
 class Solution{
     public:
+    void solve(stack<int> st, stack<int>& cloned){
+        if(st.empty()){return ;}
+        int temp = st.top(); st.pop();
+        solve(st,cloned);
+        cloned.push(temp);
+    }
     void clonestack(stack<int> st, stack<int>& cloned)
     {
-        cloned = st;
+        solve(st,cloned);
     }
 };
 
