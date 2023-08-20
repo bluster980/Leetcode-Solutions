@@ -1,21 +1,19 @@
 class Solution {
 public:
     int maximalNetworkRank(int n, vector<vector<int>>& roads) {
-        vector<unordered_set<int>> graph(n);
-        for (const auto& road: roads) {
-            graph[road[0]].insert(road[1]);
-            graph[road[1]].insert(road[0]);
+        vector<unordered_set<int>> v(n);
+        for(int i=0; i<roads.size(); i++){
+            v[roads[i][0]].insert(roads[i][1]);
+            v[roads[i][1]].insert(roads[i][0]);
         }
-        int maximal = 0;
-        for(int i = 0; i < n; i++) {
-            for (int j = i + 1; j < n; j++) {
-                int network_rank = graph[i].size() + graph[j].size();
-                if (graph[j].count(i)) {
-                    --network_rank;
-                }
-                maximal = max(maximal, network_rank);
+        int ans = 0;
+        for(int i=0; i<v.size(); i++){
+            for(int j=i+1; j<v.size(); j++){
+                int curr = v[i].size() + v[j].size();
+                if(v[j].count(i)) --curr;
+                ans = max(ans,curr);
             }
         }
-        return maximal;
+        return ans;
     }
 };
