@@ -93,20 +93,19 @@ class Solution
     {
         Node* slow = head,*fast = head,*extra = head;
         while(fast!=NULL && fast->next!=NULL){
+            if(slow->next == head) {slow->next = NULL; return;}
             fast = fast->next->next;
             slow = slow->next;
             if(slow == fast){
-                while(slow != extra){
+                extra = head;
+                while(slow->next != extra->next){
                     slow = slow->next;
                     extra = extra->next;
                 }
-                while (slow->next != extra) {
-                    slow = slow->next;
-                }
                 slow->next = NULL;
-                
-                break;
+                return ;
             }
+            
         }
     }
 };
