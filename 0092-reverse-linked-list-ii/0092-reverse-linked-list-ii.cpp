@@ -33,7 +33,6 @@ public:
             if(prev->next!=NULL)
                 prev = prev->next;
         }
-        // cout<<prev->val<<" "<<forw->next<<endl;
         ListNode* start = prev, *end = forw->next;
         start->next = reverse(prev->next,forw, forw->next);
         return head;
