@@ -8,7 +8,6 @@ public:
                 if (i >= x) result[i] += result[i - x];
             }
         }
-        
         return result[target];
     }
 };
