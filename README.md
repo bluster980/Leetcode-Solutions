@@ -7,7 +7,7 @@ These are the collections of leetcode questions that I have solved so far!! **[N
 ```
 MIT License
 
-Copyright (c) 2022 Jatin-Parmar
+Copyright (c) 2023 Jatin-Parmar
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software an
 d associated documentation files  (the "Software") to deal with the Software without restriction
