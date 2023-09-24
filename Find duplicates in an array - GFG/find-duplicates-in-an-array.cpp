@@ -14,8 +14,6 @@ class Solution{
             else{
                 i++;
             }
-            // for(int k=0; k<n; k++) cout<<nums[k]<<" ";
-            // cout<<endl;
         }
         vector<int> ans,temp={-1};
         set<int> st;
@@ -33,6 +31,24 @@ class Solution{
     }
 };
 
+//adding n everytime to array if element is got value is grater then double of the n then it is repeating.
+// class Solution{
+//   public:
+//     vector<int> duplicates(int arr[], int n) {
+//         vector<int> ans;
+//         for (int i=0; i<n; i++){
+//             int index=arr[i]%n;
+//             arr[index]+=n;
+//         }
+//         for (int i=0; i<n; i++){
+//             if((arr[i]/n)>=2)
+//                 ans.push_back(i);
+//         }
+//         if(ans.size()==0)
+//             ans.push_back(-1);
+//         return ans;
+//     }
+// };
 
 //{ Driver Code Starts.
 int main() {
