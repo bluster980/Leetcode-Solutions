@@ -1,12 +1,13 @@
 class Solution {
 public:
     char findTheDifference(string s, string t) {
-    char c,ans;
-	for(int i=0;i<s.size();i++){
-		c^=s[i]^t[i];
-	}
-    ans = char(c^t[t.size()-1]);
-	// cout<<char(c^t[t.size()-1]);
-    return ans;
-    } 
+        char xx = s[0];
+        for(int i=0; i<t.size(); i++){
+            xx^=t[i];
+        }
+        for(int i=1; i<s.size(); i++){
+            xx^=s[i];
+        }
+        return xx;
+    }
 };
