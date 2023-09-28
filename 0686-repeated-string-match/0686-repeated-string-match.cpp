@@ -10,7 +10,7 @@ public:
         string temp = a; int cnt = 1;
         while(temp.size() < b.size()){
             temp = temp + a; cnt++;
-            if(isSubString(temp,b)) return cnt;
+            // if(isSubString(temp,b)) return cnt;
         }
         if(isSubString(temp,b)) return cnt;
         temp = temp+a;
