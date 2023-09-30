@@ -1,6 +1,7 @@
 class Solution {
 public:
     int leastInterval(vector<char>& tasks, int n) {
+        if(n==0) return tasks.size();
         vector<int> frequency(26);
         int maxx = 0;
         for(int i=0; i<tasks.size(); i++){
