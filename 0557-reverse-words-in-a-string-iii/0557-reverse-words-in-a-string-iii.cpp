@@ -10,7 +10,8 @@ public:
             }
             for(int j=i; j>=l; j--){
                 ans.push_back(s[j]);
-            } i++;
+            }
+            i++;
         }
         ans.erase(ans.begin());
         return ans;
