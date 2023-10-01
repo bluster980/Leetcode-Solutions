@@ -1,45 +1,44 @@
+#define MOD INT_MAX
 class Solution {
-private:
-    int BASE = 1000000;
 public:
-    int repeatedStringMatch(string A, string B) {
-        if(A == B) return 1;
-        int count = 1;
-        string source = A;
-        while(source.size() < B.size()){
-            count++;
-            source+=A;
+
+    bool isSubstring(string check, string b, int hash_val) {
+        int curr_hash = 0;
+        int n = check.length();
+        int m = b.length();
+        long long  mul = 1;
+        for(int i = 0 ; i < b.length(); i++) {
+            curr_hash = (curr_hash + ((check[i] - 'a'+1)*mul)%MOD)%MOD;
+            mul = (mul*11)%MOD;
         }
-        if(source == B) return count;
-        if(Rabin_Karp(source,B) != -1) return count;
-        if(Rabin_Karp(source+A,B) != -1) return count+1;
-        return -1;
+        mul /= 11;
+        if(curr_hash == hash_val) return 1;
+        for(int i = 1; i <= n-m; i++) {
+            curr_hash -= (check[i-1] - 'a'+1);
+            curr_hash /= 11;
+            curr_hash = (curr_hash + ((check[i+m-1] - 'a'+1)*mul)%MOD)%MOD;
+            if(curr_hash == hash_val)
+                return 1;
+        }
+        return 0;
     }
-    int Rabin_Karp(string source, string target){
-        if(source == "" or target == "") return -1;
-        int m = target.size();
-        int power = 1;
-        for(int i = 0;i<m;i++){
-            power = (power*31)%BASE;
+
+    int repeatedStringMatch(string a, string b) {
+        int m = a.length(), n = b.length();
+        int hash_val = 0;
+        long long mul = 1;
+        for(char x: b) {
+            hash_val = (hash_val + ((x - 'a'+1)*mul)%MOD)%MOD;
+            mul = (mul*11)%MOD;
         }
-        int targetCode = 0;
-        for(int i = 0;i<m;i++){
-            targetCode = (targetCode*31+target[i])%BASE;
+        string check = "";
+        int count = 0;
+        while(check.size() < b.size()) {
+            count++;
+            check += a;
         }
-        int hashCode = 0;
-        for(int i = 0;i<source.size();i++){
-            hashCode = (hashCode*31 + source[i])%BASE;
-            if(i<m-1) continue;
-            if(i>=m){
-                hashCode = (hashCode-source[i-m]*power)%BASE;
-            }
-            if(hashCode<0)
-                hashCode+=BASE;
-            if(hashCode == targetCode){
-                if(source.substr(i-m+1,m) == target)
-                    return i-m+1;
-            }
-        }
+        if(isSubstring(check, b, hash_val)) return count;
+        if(isSubstring(check + a, b, hash_val)) return count+1;
         return -1;
     }
 };
