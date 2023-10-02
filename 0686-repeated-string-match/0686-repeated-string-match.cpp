@@ -20,39 +20,40 @@ public:
         }
         return targetHash % M;
     }
+
+    int updateHash(long long &hasa, char oldChar, char newChar, int size){
+        hasa -= ((oldChar-'a'+1) * binpow(10,size-1))%M;
+        hasa = (hasa*10)%M;
+        hasa += (newChar-'a'+1);
+        return hasa;
+    }
+
     int repeatedStringMatch(string a, string b) {
         int hasb = hashh(b);
         string temp; int cnt=0;
         while(temp.size() < b.size()){
             temp += a; cnt++;
         }
-        string dumy;
-        for(int i=0; i<b.size(); i++){
-            dumy.push_back(temp[i]);
-        }
+        string dumy(temp.begin(), temp.begin()+b.size());
+        
         long long hasa = hashh(dumy); int start = 0;
         if(hasa == hasb) return cnt;
+
         for(int i=b.size(); i<temp.size(); i++){
-            hasa -= ((temp[start++]-'a'+1) * binpow(10,dumy.size()-1))%M;
-            hasa = (hasa*10)%M;
-            hasa += (temp[i]-'a'+1);
+            hasa = updateHash(hasa, temp[start++], temp[i], dumy.size());
             if(hasa == hasb){
                 return cnt;
             }
-            // cout<<hasa<<" "<<hasb<<endl;
         }
-        int fghj = temp.size();
+
         temp += a; cnt++;
-        for(int i=fghj; i<temp.size(); i++){
-            hasa -= ((temp[start++]-'a'+1) * binpow(10,dumy.size()-1))%M;
-            hasa = (hasa*10)%M;
-            hasa += (temp[i]-'a'+1);
+        for(int i=temp.size()-a.size(); i<temp.size(); i++){
+            hasa = updateHash(hasa, temp[start++], temp[i], dumy.size());
             if(hasa == hasb){
                 return cnt;
             }
-            // cout<<hasa<<" "<<hasb<<endl;
         }
-        // cout<<temp<<endl;
+        
         return -1;
     }
 };
