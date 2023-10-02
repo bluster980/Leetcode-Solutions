@@ -1,44 +1,58 @@
-#define MOD INT_MAX
 class Solution {
+#define M INT_MAX;
 public:
-
-    bool isSubstring(string check, string b, int hash_val) {
-        int curr_hash = 0;
-        int n = check.length();
-        int m = b.length();
-        long long  mul = 1;
-        for(int i = 0 ; i < b.length(); i++) {
-            curr_hash = (curr_hash + ((check[i] - 'a'+1)*mul)%MOD)%MOD;
-            mul = (mul*11)%MOD;
+    long long binpow(int a, int b){
+        long long ans = 1;
+        while(b>0){
+            if(b&1){
+                ans = (ans * 1ll * a) % M;
+            }
+            a = (a * 1ll * a) % M;
+            b >>= 1;
         }
-        mul /= 11;
-        if(curr_hash == hash_val) return 1;
-        for(int i = 1; i <= n-m; i++) {
-            curr_hash -= (check[i-1] - 'a'+1);
-            curr_hash /= 11;
-            curr_hash = (curr_hash + ((check[i+m-1] - 'a'+1)*mul)%MOD)%MOD;
-            if(curr_hash == hash_val)
-                return 1;
-        }
-        return 0;
+        return ans;
     }
 
+    int hashh(string s){
+        long long targetHash = 0; int size = s.size()-1;
+        for(int i=0; i<s.size(); i++){
+            targetHash += ((s[i]-'a'+1) * binpow(10,size--));
+        }
+        return targetHash % M;
+    }
     int repeatedStringMatch(string a, string b) {
-        int m = a.length(), n = b.length();
-        int hash_val = 0;
-        long long mul = 1;
-        for(char x: b) {
-            hash_val = (hash_val + ((x - 'a'+1)*mul)%MOD)%MOD;
-            mul = (mul*11)%MOD;
+        int hasb = hashh(b);
+        string temp; int cnt=0;
+        while(temp.size() < b.size()){
+            temp += a; cnt++;
         }
-        string check = "";
-        int count = 0;
-        while(check.size() < b.size()) {
-            count++;
-            check += a;
+        string dumy;
+        for(int i=0; i<b.size(); i++){
+            dumy.push_back(temp[i]);
         }
-        if(isSubstring(check, b, hash_val)) return count;
-        if(isSubstring(check + a, b, hash_val)) return count+1;
+        long long hasa = hashh(dumy); int start = 0;
+        if(hasa == hasb) return cnt;
+        for(int i=b.size(); i<temp.size(); i++){
+            hasa -= ((temp[start++]-'a'+1) * binpow(10,dumy.size()-1))%M;
+            hasa = (hasa*10)%M;
+            hasa += (temp[i]-'a'+1);
+            if(hasa == hasb){
+                return cnt;
+            }
+            // cout<<hasa<<" "<<hasb<<endl;
+        }
+        int fghj = temp.size();
+        temp += a; cnt++;
+        for(int i=fghj; i<temp.size(); i++){
+            hasa -= ((temp[start++]-'a'+1) * binpow(10,dumy.size()-1))%M;
+            hasa = (hasa*10)%M;
+            hasa += (temp[i]-'a'+1);
+            if(hasa == hasb){
+                return cnt;
+            }
+            // cout<<hasa<<" "<<hasb<<endl;
+        }
+        // cout<<temp<<endl;
         return -1;
     }
 };
