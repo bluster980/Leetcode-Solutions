@@ -1,41 +1,40 @@
 class MyHashMap {
-    private:
-    const int my_size=10000;
-    vector<list<pair<int,int>>>hash;
 public:
+    vector<pair<int,int>> v;
     MyHashMap() {
-        hash.resize(my_size);
+        
     }
     
     void put(int key, int value) {
-        auto&Mylist=hash[key%my_size];
-        for(auto&Mypair:Mylist){
-            if(Mypair.first==key){
-                Mypair.second=value;
+        for(int i=0; i<v.size(); i++){
+            if(v[i].first == key){
+                v.erase(v.begin()+i);
+                v.push_back({key,value});
                 return;
             }
         }
-        Mylist.push_back({key,value});
+        v.push_back({key,value});
     }
     
     int get(int key) {
-        auto&Mylist=hash[key%my_size];
-        for(auto&Mypair:Mylist){
-            if(Mypair.first==key){
-                return Mypair.second;
+        for(int i=0; i<v.size(); i++){
+            if(v[i].first == key){
+                return v[i].second;
             }
         }
         return -1;
     }
     
     void remove(int key) {
-        auto&Mylist=hash[key%my_size];
-        for(auto&Mypair:Mylist){
-            if(Mypair.first==key){
-                Mylist.remove(Mypair);
+        int x,y; int i=0;
+        while(i<v.size()){
+            if(v[i].first == key){
+                v.erase(v.begin()+i);
                 return;
             }
+            i++;
         }
+        return;
     }
 };
 
