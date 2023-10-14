@@ -3,17 +3,16 @@ public:
     int findMin(vector<int>& nums) {
         int l=0,r=nums.size()-1;
         while(l<r){
-            // cout<<l<<" "<<r<<endl;
             int mid = l + (r-l)/2;
             if(nums[mid] > nums[r]){
                 l = mid+1;
             }
-            else if(nums[mid] < nums[r]){
+            else{
                 r = mid;
             }
-            else{
-                r--;
-            }
+            // else{
+            //     r--;
+            // }
         }
         return nums[l];
     }
