@@ -4,7 +4,6 @@ public:
         while (sx < tx && sy < ty)
             if (tx < ty) ty %= tx;
             else tx %= ty;
-        return sx == tx && sy <= ty && (ty - sy) % sx == 0 ||
-               sy == ty && sx <= tx && (tx - sx) % sy == 0;
+        return sx == tx && sy <= ty && (ty - sy) % sx == 0 || sy == ty && sx <= tx && (tx - sx) % sy == 0;
     }
 };
