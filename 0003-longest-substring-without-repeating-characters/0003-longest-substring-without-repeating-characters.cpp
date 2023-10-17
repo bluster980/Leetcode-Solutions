@@ -1,16 +1,16 @@
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
-        int l=0,r=0;
-        unordered_map<char,int> mp;
+        int left = 0, right = 0;
+        vector<int> chars(256, -1);
         int maxx = 0;
-        while(r < s.size()){
-            if(mp.find(s[r]) != mp.end() && (mp[s[r]] >= l)){
-                l = max(l,(mp[s[r]]+1));
+        while (right < s.size()) {
+            if (chars[s[right]] != -1) {
+                left = max(left, chars[s[right]] + 1);
             }
-            mp[s[r]] = r;
-            maxx = max(maxx,r-l+1);
-            r++;
+            chars[s[right]] = right;
+            maxx = max(maxx, right - left + 1);
+            right++;
         }
         return maxx;
     }
