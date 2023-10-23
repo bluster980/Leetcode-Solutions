@@ -11,10 +11,6 @@ public:
                 }
                 count++;
             }
-            //     count++;
-            // if(n & (1<<i) && i%2==0){
-            //     ans = true;
-            // }
         }
         return (count==1)?ans:false;
     }
