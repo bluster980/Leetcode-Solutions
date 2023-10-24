@@ -32,6 +32,7 @@ public:
         return ans;
     }
     vector<int> largestValues(TreeNode* root) {
+        if(!root) return {};
         return levelOrder(root);
     }
 };
