@@ -24,12 +24,8 @@ public:
         
         int result = 0;
         for(auto xx:dp){
-            // cout<<xx.first<<" "<<xx.second<<endl;
             result = (result + xx.second) % MOD;
         }
-        // for (auto& [_, val] : dp) {
-        //     result = (result + val) % MOD;
-        // }
         return result;
     }
 };
