@@ -5,7 +5,7 @@ public:
         unordered_map<int,int> mp; int ans = 0;
         sort(nums.begin(),nums.end());
         for(int i = 0; i<nums.size(); i++){
-            long long cnt = 1;
+            int cnt = 1;
             for(int j=0; j<i; j++){
                 if(nums[i]%nums[j]) continue;
                 long long x = nums[j];
