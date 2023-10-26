@@ -2,7 +2,7 @@ class Solution {
 public:
     const int MOD = 1e9+7;
     int numFactoredBinaryTrees(vector<int>& nums) {
-        unordered_map<int,int> mp; long long ans = 0;
+        unordered_map<int,int> mp; int ans = 0;
         sort(nums.begin(),nums.end());
         for(int i = 0; i<nums.size(); i++){
             long long cnt = 1;
@@ -15,6 +15,6 @@ public:
             mp[nums[i]] = cnt%MOD;
             ans = (ans + cnt) % MOD;
         }
-        return (int)ans;
+        return ans;
     }
 };
