@@ -11,23 +11,37 @@
  */
 class Solution {
 public:
-    void inorder(TreeNode* root, map<int,int> &mp, int &maxx){
+    void inorder(TreeNode* root, int &cnt, int &maxx, int &prev, vector<int> &ans){
         if(root == NULL){
             return ;
         }
-        inorder(root->left,mp,maxx);
-        mp[root->val]++;
-        maxx = max(maxx,mp[root->val]);
-        inorder(root->right,mp,maxx);
+        inorder(root->left,cnt,maxx,prev,ans);
+        if(root->val == prev){
+            cnt++;
+        }
+        else{
+            if(cnt > maxx){
+                maxx = cnt;
+                ans.clear();
+                ans.push_back(prev);
+            }
+            else if(cnt == maxx){
+                ans.push_back(prev);
+            }
+            prev = root->val;
+            cnt = 1;
+        }
+        inorder(root->right,cnt,maxx,prev,ans);
     }
     vector<int> findMode(TreeNode* root) {
-        map<int,int> mp; int maxx = 0;
-        inorder(root,mp,maxx);
+        int cnt = 0, maxx = 1, prev = root->val;
         vector<int> ans;
-        for(auto xx:mp){
-            if(xx.second == maxx){
-                ans.push_back(xx.first);
-            }
+        inorder(root,cnt,maxx,prev,ans); 
+        if (cnt > maxx) {
+            ans.clear();
+            ans.push_back(prev);
+        } else if (cnt == maxx) {
+            ans.push_back(prev);
         }
         return ans;
     }
