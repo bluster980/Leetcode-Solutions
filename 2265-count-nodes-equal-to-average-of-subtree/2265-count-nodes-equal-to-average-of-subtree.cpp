@@ -16,12 +16,12 @@ public:
         if(root==NULL) return {0,0};
         
         auto left = solve(root->left);
-        int l_sum = left.first; // sum of nodes present in left sub tree
-        int l_cnt = left.second; // no. of nodes present in left sub tree
+        int l_sum = left.first;
+        int l_cnt = left.second;
         
         auto right = solve(root->right);
-        int r_sum = right.first; // sum of nodes present in right sub tree
-        int r_cnt = right.second; // no. of nodes present in left sub tree
+        int r_sum = right.first;
+        int r_cnt = right.second;
         
         int sum = root->val + l_sum + r_sum;
         int cnt = l_cnt + r_cnt + 1;
