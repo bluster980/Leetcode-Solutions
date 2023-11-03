@@ -10,6 +10,7 @@ public:
                 currElem++;
             }
             ans.push_back("Push");
+            
             currElem++;
         }
         return ans;
