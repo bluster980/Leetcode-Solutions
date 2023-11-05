@@ -6,7 +6,8 @@ public:
         for(int i = 1; i < arr.size(); i++){
             if (maxNumSeen > arr[i]){               
                 maxCount++;                   
-            }else{
+            }
+            else{
                 maxNumSeen = arr[i];         
                 maxCount = 1;                
             }
