@@ -16,7 +16,7 @@ public:
         q.push(root);
         
         while(!q.empty()) {
-            root=q.front(); // get the value before pop coz pop will not return anyy val
+            root=q.front();
             q.pop();
             if (root->right) q.push(root->right);
             if(root->left) q.push(root->left);
