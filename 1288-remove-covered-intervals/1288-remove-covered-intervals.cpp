@@ -11,19 +11,12 @@ public:
                 }
                 else if(in[i][0] == temp.first && in[i][1] >= temp.second){
                     st.pop();
-                    st.push({in[i][0], in[i][1]});
-                }
-                else{
-                    st.push({in[i][0], in[i][1]});
                 }
             }
-            else{
-                st.push({in[i][0], in[i][1]});
-            }
+            st.push({in[i][0], in[i][1]});
         }
         int cnt = 0;
         while(!st.empty()){
-            // cout<<st.top().first<<" "<<st.top().second<<endl;
             cnt++;
             st.pop();
         }
