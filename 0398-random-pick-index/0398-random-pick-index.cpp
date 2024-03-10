@@ -9,7 +9,6 @@ public:
     int pick(int target) {
         vector<int> temp = mp[target];
         int ran = (rand() % temp.size());
-        // cout<<ran<<endl;
         return temp[ran];
     }
 };
