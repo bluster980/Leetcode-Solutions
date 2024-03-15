@@ -1,29 +1,24 @@
 class Solution {
 public:
-    int minDays(vector<int>& nums, int m, int k) {
-        if(nums.size() < m*1ll*k) return -1;
-        int minn = INT_MAX, maxx = INT_MIN;
-        for(int i=0; i<nums.size(); i++){
-            maxx = max(maxx, nums[i]);
-            minn = min(minn, nums[i]);
-        }
-        int l = minn, r = maxx;
-        while(l <= r){
-            int mid = l+(r-l)/2; int temp = 0;
-            for(int i=0; i<nums.size(); i++){
-                int cnt = 0;
-                while(i<nums.size() && nums[i] <= mid){
-                    i++; cnt++;
+    int minDays(vector<int>& A, int m, int k) {
+        int n = A.size(), left = 1, right = 1e9;
+        if (m * 1ll * k > n) return -1;
+        while (left < right) {
+            int mid = (left + right) / 2, flow = 0, bouq = 0;
+            for (int j = 0; j < n; ++j) {
+                if (A[j] > mid) {
+                    flow = 0;
+                } else if (++flow >= k) {
+                    bouq++;
+                    flow = 0;
                 }
-                temp += (cnt/k);
             }
-            if(temp >= m) {
-                r = mid-1;
-            }
-            else{
-                l = mid+1;
+            if (bouq < m) {
+                left = mid + 1;
+            } else {
+                right = mid;
             }
         }
-        return l;
+        return left;
     }
 };
