@@ -1,20 +1,29 @@
 class Solution {
 public:
     int findMaxLength(vector<int>& nums) {
-        int sum=0; map<int,int> mp; int maxx = 0;
-        for(int i=0; i<nums.size(); i++){
-            if(nums[i] == 0) sum--;
-            else sum++;
-            if(sum == 0) maxx = max(maxx, i+1);
-            else{
-                if(mp.find(sum) != mp.end()){
-                    maxx = max(maxx, i-mp[sum]);
-                }
-                else{
-                    mp[sum] = i;
-                }
+        int length = INT_MIN;
+        map<int,int> mp;
+        int sum = 0;
+        mp.insert({0,-1});
+        for(int i=0;i<nums.size(); i++){
+            if (nums[i]==1)
+            {
+            	sum++;
             }
+            else{
+            	sum--;
+            }
+            mp.insert({sum,i});
+            int idx;
+            if (mp.count(sum)!=0)
+            {
+            	idx = mp.at(sum);
+            	// length = i - idx;
+            	length = max(length,(i-idx));
+            }
+
         }
-        return maxx;
+        // cout<<length<<endl;
+        return length;
     }
 };
