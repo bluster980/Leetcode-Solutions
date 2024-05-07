@@ -11,8 +11,25 @@
 class Solution {
 public:
     ListNode* removeNodes(ListNode* head) {
-        if (!head) return NULL;
-        head->next = removeNodes(head->next);
-        return head->next && head->val < head->next->val ?  head->next : head;
+        stack<int> st;
+        ListNode* curr=head;
+        while(curr!=NULL){
+            while(!st.empty() && st.top() < curr->val){
+                st.pop();
+            }
+            st.push(curr->val);
+            curr=curr->next;
+        }
+        vector<int> v;
+        while(!st.empty()){
+            v.push_back(st.top());
+            st.pop();
+        }
+        ListNode *start = new ListNode(999), *temp=start;
+        for(int i=v.size()-1; i>=0; i--){
+            temp->next = new ListNode(v[i]);
+            temp = temp->next;
+        }
+        return start->next;
     }
 };
