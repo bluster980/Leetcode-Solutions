@@ -1,55 +1,63 @@
-#define ff first
-#define ss second
 class LRUCache {
 public:
-    map<int,int>kp,m; int count = 0;
-    //key, counter in queue
-    queue<pair<int,int>> q;
+    struct ListNode {
+        ListNode* prev;
+        ListNode* next;
+        int key,val;
+        ListNode(int _key, int _val){
+            key = _key;
+            val = _val;
+        } 
+    };
+    
+    ListNode* head = new ListNode(-1, -1);
+    ListNode* tail = new ListNode(-1, -1);
+    unordered_map<int,ListNode*> mp;
     int capacity;
     LRUCache(int capacity) {
         this->capacity = capacity;
+        head->next = tail;
+        tail->prev = head;
+    }
+    void addnode(ListNode* root){
+        ListNode* dumy = head->next;
+        root->next = dumy;
+        head->next = root;
+        dumy->prev = root;
+        root->prev = head;
     }
     
+    void deletenode(ListNode* root){
+        ListNode* temp = root->prev;
+        ListNode* dumy = root->next;
+        temp->next = dumy;
+        dumy->prev = temp;
+    }
     int get(int key) {
-        
-        if(m[key]==0)
-            return -1;
-        
-        q.push({key,++m[key]});
-        return kp[key];
-    
+        if(mp.find(key) != mp.end()){
+            ListNode* temp = mp[key];
+            int valu = temp->val;
+            mp.erase(key);
+            deletenode(temp);
+            addnode(temp);
+            mp[key] = head->next;
+            return valu;
+        }
+        return -1;
     }
     
     void put(int key, int value) {
-        kp[key] = value;
-        
-        if(m[key]>0)
-        {
-            q.push({key,++m[key]});
-            return ;
+        if(mp.find(key) != mp.end()){
+            ListNode* tt = mp[key];
+            mp.erase(key);
+            deletenode(tt);
         }
-        
-        if(count<capacity)
-        {
-            if(m[key]==0 || m.count(key)==0)
-                count++;
-            q.push({key,++m[key]});
-            return ;
+        if(mp.size() == capacity){
+            mp.erase(tail->prev->key);
+            deletenode(tail->prev);
         }
-            
-        while(1)
-        {
-            pair<int,int> tem = q.front();
-            q.pop();
-            if(m[tem.ff]==tem.ss)
-            {
-                m[tem.ff] = 0;
-                q.push({key,++m[key]});
-                return ;
-            }
-        }
-        
-        
+        addnode(new ListNode(key,value));
+        mp[key] = head->next;
     }
 };
 
