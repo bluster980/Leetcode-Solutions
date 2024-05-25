@@ -16,19 +16,15 @@ public:
     {
         if(ind==s.length())
         {
-            //we have reached end
-            curr.pop_back(); //remove the trailing space
+            curr.pop_back();
             res.push_back(curr);
         }
         string str="";
         for(int i=ind;i<s.length();i++)
         {
-            //get every substring and check if it exists in set
             str.push_back(s[i]);
             if(set.count(str))
             {
-                //we have got a word in dict 
-                //explore more and get other substrings
                 findHelper(i+1,s,curr+str+" ",set,res);
             }
         }
