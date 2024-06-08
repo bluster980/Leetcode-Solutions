@@ -9,16 +9,15 @@ public:
         for(int i=0; i<s.size(); i++){
             if(s[i] == ' '){
                 if(ans.size()>0) ans += ' ';
-                int j = 0;
+                int j = 0; string dumy;
                 while(j < temp.size()){
-                    if(mp.count(temp.substr(0,j))){
-                        ans += temp.substr(0,j); break;
+                    dumy.push_back(temp[j]);
+                    if(mp.count(dumy)){
+                        break;
                     }
                     j++;
                 }
-                if(j == temp.size()){
-                    ans += temp;
-                }
+                ans += dumy;
                 temp = "";
             }
             else{
