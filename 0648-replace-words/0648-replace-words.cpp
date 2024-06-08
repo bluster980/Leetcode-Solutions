@@ -1,7 +1,7 @@
 class Solution {
 public:
     string replaceWords(vector<string>& d, string s) {
-        map<string,int> mp; s.push_back(' ');
+        unordered_map<string,int> mp; s.push_back(' ');
         for(int i=0; i<d.size(); i++){
             mp[d[i]]++;
         }
@@ -19,7 +19,11 @@ public:
                 i++;
                 
             }
-            if(!flag) {temp.push_back(s[i-1]); ans += temp; ans.push_back(' ');}
+            if(!flag){
+                temp.push_back(s[i-1]); 
+                ans += temp; 
+                ans.push_back(' ');
+            }
             j = i+1;
         }
         ans.pop_back();
