@@ -8,17 +8,16 @@ public:
         string temp; string ans;
         for(int i=0; i<s.size(); i++){
             if(s[i] == ' '){
+                if(ans.size()>0) ans += ' ';
                 int j = 0;
                 while(j < temp.size()){
                     if(mp.count(temp.substr(0,j))){
-                        ans += temp.substr(0,j);
-                        ans += " "; break;
+                        ans += temp.substr(0,j); break;
                     }
                     j++;
                 }
                 if(j == temp.size()){
                     ans += temp;
-                    ans += " ";
                 }
                 temp = "";
             }
@@ -27,7 +26,6 @@ public:
             }
             
         }
-        ans.pop_back();
         return ans;
     }
 };
