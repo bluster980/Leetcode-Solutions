@@ -27,12 +27,12 @@ private:
         map<string, int> counts;
         const int n = s.size();
         if (s[i] == '(') {
-            map<string, int> cnts = parseFormula(s, ++i); // ++i for '('
-            int digits = parseDigits(s, ++i); // ++i for ')'
+            map<string, int> cnts = parseFormula(s, ++i);
+            int digits = parseDigits(s, ++i);
             merge(counts, cnts, digits);
         }
         else {
-            int i0 = i++; // first letter
+            int i0 = i++;
             while (i < n && islower(s[i])) { i++; }
             string atom = s.substr(i0, i - i0);
             int digits = parseDigits(s, i);
