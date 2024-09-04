@@ -22,5 +22,5 @@ public:
             
             ans=max(ans, coord[0]*coord[0]+coord[1]*coord[1]); }
         return ans; 
-    } 
+    }
 };
