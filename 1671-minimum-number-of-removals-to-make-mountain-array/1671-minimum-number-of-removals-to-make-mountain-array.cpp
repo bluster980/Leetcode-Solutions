@@ -29,8 +29,5 @@ public:
             }
         }
         return result;
-
-
-
     }
 };
