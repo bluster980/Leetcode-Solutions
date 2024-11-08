@@ -21,8 +21,6 @@ public:
              xor1 ^= nums[n - 1 - i];
 
         }
-
-
         return ans;
     }
 };
