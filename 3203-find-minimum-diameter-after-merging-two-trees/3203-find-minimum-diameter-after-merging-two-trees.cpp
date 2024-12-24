@@ -38,7 +38,6 @@ public:
         }
         int val1 = getMinLen(adj1, m);
         int val2 = getMinLen(adj2, n);
-        // cout<<val1<<" "<<val2<<"\n";
         return max(maxres, val1 + val2 + 1);
     }
 };
